@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/repoCard"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="6dp"
+    app:cardUseCompatPadding="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/ownerImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="10dp"
+                android:contentDescription="Owner Avatar"
+                android:scaleType="centerCrop"
+                tools:src="@color/cardview_dark_background"/>
+
+            <TextView
+                android:id="@+id/repoNameText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ownerImage"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:gravity="center_horizontal"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:textSize="20sp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                tools:text="Repositório de Código Aberto"/>
+
+            <TextView
+                android:id="@+id/repoOwnerLoginText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/repoNameText"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="20dp"
+                android:gravity="center"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="14sp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                tools:text="By Bruno Ponte"/>
+
+            <TextView
+                android:id="@+id/repoDescriptionLabelText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/repoOwnerLoginText"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textSize="16sp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                android:text="teste"/>
+
+            <TextView
+                android:id="@+id/repoDescriptionText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/repoDescriptionLabelText"
+                android:layout_marginTop="5dp"
+                android:layout_marginHorizontal="20dp"
+                android:textSize="14sp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                tools:text="Uma descrição muito muito grande"/>
+
+            <TextView
+                android:id="@+id/repoLanguageLabelText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/repoDescriptionText"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:textSize="16sp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                android:text="teste"/>
+
+            <TextView
+                android:id="@+id/repoLanguageText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/repoLanguageLabelText"
+                android:layout_marginTop="5dp"
+                android:layout_marginHorizontal="20dp"
+                android:textSize="14sp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                tools:text="Uma descrição muito muito grande"/>
+
+            <TextView
+                android:id="@+id/repoWatchersLabelText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/repoLanguageText"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:textSize="16sp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                android:text="teste"/>
+
+            <TextView
+                android:id="@+id/repoWatchersText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/repoWatchersLabelText"
+                android:layout_marginTop="5dp"
+                android:layout_marginHorizontal="20dp"
+                android:textSize="14sp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                tools:text="Uma descrição muito muito grande"/>
+
+            <TextView
+                android:id="@+id/repoForksLabelText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/repoWatchersText"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:textSize="16sp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                android:text="teste"/>
+
+            <TextView
+                android:id="@+id/repoForksText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/repoForksLabelText"
+                android:layout_marginTop="5dp"
+                android:layout_marginHorizontal="20dp"
+                android:textSize="14sp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                tools:text="Uma descrição muito muito grande"/>
+
+            <TextView
+                android:id="@+id/repoLastUpdateLabelText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/repoForksText"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:textSize="16sp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                android:text="teste"/>
+
+            <TextView
+                android:id="@+id/repoLastUpdateText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/repoLastUpdateLabelText"
+                android:layout_marginTop="5dp"
+                android:layout_marginHorizontal="20dp"
+                android:textSize="14sp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                tools:text="2020-01-28T18:25:40Z"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.cardview.widget.CardView>
