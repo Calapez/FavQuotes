@@ -34,7 +34,9 @@ class QuoteViewHolder(
                 Html.fromHtml(quote.body ?: "")
             }
 
-            textAuthor.text = "By ${quote.author ?: notApplicableText}"
+            textAuthor.text = quote.author?.let {
+                "- ${quote.author}"
+            } ?: notApplicableText
 
             tagsRecyclerView.let { recyclerView ->
                 recyclerView.layoutManager = LinearLayoutManager(itemView.context).also {
@@ -56,7 +58,7 @@ class QuoteViewHolder(
 }
 
 interface TagListInteraction {
-    fun onClick(position: Int, quote: String?)
+    fun onClick(position: Int, tag: String?)
 }
 
 class TagListAdapter(

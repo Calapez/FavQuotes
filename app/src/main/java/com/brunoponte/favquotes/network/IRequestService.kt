@@ -16,6 +16,7 @@ interface IRequestService {
         @Header("Authorization") authToken: String,
         @Query("page") page: Int,
         @Query("filter") query: String?,
+        @Query("type") filterType: String?,
     ) : GetQuotesResponse
 
 }

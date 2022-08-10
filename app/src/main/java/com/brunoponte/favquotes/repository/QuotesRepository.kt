@@ -19,10 +19,10 @@ class QuotesRepository(
         }
     }
 
-    override suspend fun getQuotes(pageSize: Int, page: Int, query: String) : List<Quote> {
+    override suspend fun getQuotes(pageSize: Int, page: Int, query: String, filterType: String?) : List<Quote> {
 
         try {
-            val quotes = getQuotesFromNetwork(page, query)
+            val quotes = getQuotesFromNetwork(page, query, filterType)
 
             // Insert into cache
             if (page == 1) {
@@ -45,9 +45,9 @@ class QuotesRepository(
         return quoteEntity?.let { QuoteEntityMapper.mapToDomainModel(it) }
     }
 
-    private suspend fun getQuotesFromNetwork(page: Int, query: String) =
+    private suspend fun getQuotesFromNetwork(page: Int, query: String, filterType: String?) =
         QuoteDtoMapper.toDomainModelList(
-            requestService.getQuotes(authToken, page, query.ifEmpty { null }).quotes?.filter {
+            requestService.getQuotes(authToken, page, query.ifEmpty { null }, filterType).quotes?.filter {
                 true//it.id != 0L
             } ?: listOf()
         )

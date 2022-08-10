@@ -5,4 +5,5 @@
     <color name="main_variant_2">#a13045</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="selectedColor">#C9E88C</color>
 </resources>

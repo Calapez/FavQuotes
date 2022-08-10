@@ -23,6 +23,9 @@ constructor(
 
     val isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     val quotes: MutableLiveData<List<Quote>> = MutableLiveData(listOf())
+    val isContentSelected: MutableLiveData<Boolean> = MutableLiveData(true)
+    val isTagSelected: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isAuthorSelected: MutableLiveData<Boolean> = MutableLiveData(false)
 
     fun getFirstQuotes() {
         // Fetches the first page of the repos
@@ -34,7 +37,7 @@ constructor(
 
         CoroutineScope(Dispatchers.IO).launch {
             isLoading.postValue(true)
-            val result = quotesRepo.getQuotes(PAGE_SIZE, 1, query)
+            val result = quotesRepo.getQuotes(PAGE_SIZE, 1, query, filterType)
             page += 1
             isLoading.postValue(false)
 
@@ -51,6 +54,42 @@ constructor(
         }
     }
 
+    fun onContentClicked() {
+        if (isContentSelected.value == true) {
+            return
+        }
+
+        isContentSelected.value = true
+        isTagSelected.value = false
+        isAuthorSelected.value = false
+
+        searchQuotes(query)
+    }
+
+    fun onTagClicked() {
+        if (isTagSelected.value == true) {
+            return
+        }
+
+        isContentSelected.value = false
+        isTagSelected.value = true
+        isAuthorSelected.value = false
+
+        searchQuotes(query)
+    }
+
+    fun onAuthorClicked() {
+        if (isAuthorSelected.value == true) {
+            return
+        }
+
+        isContentSelected.value = false
+        isTagSelected.value = false
+        isAuthorSelected.value = true
+
+        searchQuotes(query)
+    }
+
     private fun getNextPage() {
         CoroutineScope(Dispatchers.IO).launch {
             if (reachedEndOfList()) {
@@ -58,7 +97,7 @@ constructor(
 
                 // Prevents this to be called on first page load
                 if (page > 1) {
-                    val result = quotesRepo.getQuotes(PAGE_SIZE, page, query)
+                    val result = quotesRepo.getQuotes(PAGE_SIZE, page, query, filterType)
 
                     // Append quotes
                     val current = ArrayList(quotes.value)
@@ -78,13 +117,18 @@ constructor(
 
         CoroutineScope(Dispatchers.IO).launch {
             isLoading.postValue(true)
-            val result = quotesRepo.getQuotes(PAGE_SIZE, page, query)
+            val result = quotesRepo.getQuotes(PAGE_SIZE, page, query, filterType)
             page += 1
             isLoading.postValue(false)
 
             quotes.postValue(result)
         }
     }
+
+    private val filterType
+        get() = if (isTagSelected.value == true) { "tag" }
+                else if (isAuthorSelected.value == true) { "author" }
+                else { null }
 
     private fun reachedEndOfList() = scrollPosition >= quotes.value!!.size - 1
 

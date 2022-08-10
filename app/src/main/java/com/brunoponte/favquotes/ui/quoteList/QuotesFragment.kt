@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.brunoponte.favquotes.R
 import com.brunoponte.favquotes.databinding.QuotesFragmentBinding
 import com.brunoponte.favquotes.domainModels.Quote
 import com.brunoponte.favquotes.ui.quoteList.listAdapter.QuoteListAdapter
@@ -61,6 +62,18 @@ class QuotesFragment : Fragment(), QuoteListInteraction, TagListInteraction {
         binding.searchView.doOnTextChanged { text, _, _, _ ->
             viewModel.searchQuotes(text.toString())
         }
+
+        binding.cardContent.setOnClickListener {
+            viewModel.onContentClicked()
+        }
+
+        binding.cardTag.setOnClickListener {
+            viewModel.onTagClicked()
+        }
+
+        binding.cardAuthor.setOnClickListener {
+            viewModel.onAuthorClicked()
+        }
     }
 
     override fun onClick(position: Int, quote: Quote) {
@@ -81,6 +94,28 @@ class QuotesFragment : Fragment(), QuoteListInteraction, TagListInteraction {
 
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             binding.progressIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+
+        viewModel.isContentSelected.observe(viewLifecycleOwner) { isContentSelected ->
+            binding.cardContent.setCardBackgroundColor(resources.getColor(
+                if (isContentSelected) R.color.selectedColor
+                else R.color.white
+            ))
+
+        }
+
+        viewModel.isTagSelected.observe(viewLifecycleOwner) { isTagSelected ->
+            binding.cardTag.setCardBackgroundColor(resources.getColor(
+                if (isTagSelected) R.color.selectedColor
+                else R.color.white
+            ))
+        }
+
+        viewModel.isAuthorSelected.observe(viewLifecycleOwner) { isAuthorSelected ->
+            binding.cardAuthor.setCardBackgroundColor(resources.getColor(
+                if (isAuthorSelected) R.color.selectedColor
+                else R.color.white
+            ))
         }
     }
 

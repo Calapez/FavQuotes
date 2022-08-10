@@ -28,7 +28,7 @@
             android:layout_marginHorizontal="10dp"
             android:maxLines="3"
             android:ellipsize="end"
-            android:textSize="17sp"
+            android:textSize="16sp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
             tools:text="Repositório de Código Aberto"/>
 
@@ -41,9 +41,9 @@
             android:layout_marginHorizontal="10dp"
             android:maxLines="1"
             android:ellipsize="end"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:gravity="end"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
             tools:text="Descrição do repositório edijoddijeijewjio eiwejojwijiojdiojewoijweoidjdjdijdioj eiwweiojijodiojdoidijoweoijiojoijweiojdijweiodjewj weijewjijeweiojjioiowefj"/>
 
         <androidx.recyclerview.widget.RecyclerView
