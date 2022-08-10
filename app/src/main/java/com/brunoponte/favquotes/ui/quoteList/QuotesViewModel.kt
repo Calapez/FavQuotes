@@ -23,9 +23,9 @@ constructor(
 
     val isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     val quotes: MutableLiveData<List<Quote>> = MutableLiveData(listOf())
-    val isContentSelected: MutableLiveData<Boolean> = MutableLiveData(true)
-    val isTagSelected: MutableLiveData<Boolean> = MutableLiveData(false)
-    val isAuthorSelected: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isContentFilterSelected: MutableLiveData<Boolean> = MutableLiveData(true)
+    val isTagFilterSelected: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isAuthorFilterSelected: MutableLiveData<Boolean> = MutableLiveData(false)
 
     fun getFirstQuotes() {
         // Fetches the first page of the repos
@@ -54,40 +54,46 @@ constructor(
         }
     }
 
-    fun onContentClicked() {
-        if (isContentSelected.value == true) {
+    fun onContentFilterClicked() {
+        if (isContentFilterSelected.value == true) {
             return
         }
 
-        isContentSelected.value = true
-        isTagSelected.value = false
-        isAuthorSelected.value = false
+        isContentFilterSelected.value = true
+        isTagFilterSelected.value = false
+        isAuthorFilterSelected.value = false
 
         searchQuotes(query)
     }
 
-    fun onTagClicked() {
-        if (isTagSelected.value == true) {
+    fun onTagFilterClicked() {
+        if (isTagFilterSelected.value == true) {
             return
         }
 
-        isContentSelected.value = false
-        isTagSelected.value = true
-        isAuthorSelected.value = false
+        isContentFilterSelected.value = false
+        isTagFilterSelected.value = true
+        isAuthorFilterSelected.value = false
 
         searchQuotes(query)
     }
 
-    fun onAuthorClicked() {
-        if (isAuthorSelected.value == true) {
+    fun onAuthorFilterClicked() {
+        if (isAuthorFilterSelected.value == true) {
             return
         }
 
-        isContentSelected.value = false
-        isTagSelected.value = false
-        isAuthorSelected.value = true
+        isContentFilterSelected.value = false
+        isTagFilterSelected.value = false
+        isAuthorFilterSelected.value = true
 
         searchQuotes(query)
+    }
+
+    fun onTagClicked(tag: String) {
+        isContentFilterSelected.value = false
+        isTagFilterSelected.value = true
+        isAuthorFilterSelected.value = false
     }
 
     private fun getNextPage() {
@@ -126,8 +132,8 @@ constructor(
     }
 
     private val filterType
-        get() = if (isTagSelected.value == true) { "tag" }
-                else if (isAuthorSelected.value == true) { "author" }
+        get() = if (isTagFilterSelected.value == true) { "tag" }
+                else if (isAuthorFilterSelected.value == true) { "author" }
                 else { null }
 
     private fun reachedEndOfList() = scrollPosition >= quotes.value!!.size - 1

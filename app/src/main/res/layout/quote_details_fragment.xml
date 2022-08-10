@@ -24,159 +24,151 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <ImageView
-                android:id="@+id/ownerImage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="10dp"
-                android:contentDescription="Owner Avatar"
-                android:scaleType="centerCrop"
-                tools:src="@color/cardview_dark_background"/>
-
             <TextView
-                android:id="@+id/repoNameText"
+                android:id="@+id/textQuote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ownerImage"
-                android:layout_marginTop="20dp"
-                android:layout_marginHorizontal="20dp"
-                android:gravity="center_horizontal"
-                android:maxLines="3"
-                android:ellipsize="end"
-                android:textSize="20sp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                tools:text="Repositório de Código Aberto"/>
-
-            <TextView
-                android:id="@+id/repoOwnerLoginText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/repoNameText"
-                android:layout_marginTop="10dp"
-                android:layout_marginHorizontal="20dp"
                 android:gravity="center"
-                android:maxLines="2"
-                android:ellipsize="end"
-                android:textSize="14sp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-                tools:text="By Bruno Ponte"/>
+                android:typeface="serif"
+                android:textSize="15sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="30dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Quote X" />
 
             <TextView
-                android:id="@+id/repoDescriptionLabelText"
+                android:id="@+id/textAuthor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/repoOwnerLoginText"
+                app:layout_constraintTop_toBottomOf="@id/textQuote"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="30dp"
+                android:textSize="13sp"
+                android:gravity="end"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
+                tools:text="Author"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tagsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/textAuthor"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="20dp"/>
+
+            <TextView
+                android:id="@+id/textLabelDialogue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tagsRecyclerView"
                 android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="20dp"
                 android:maxLines="1"
                 android:ellipsize="end"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                android:text="teste"/>
+                android:text="Dialogue"/>
 
             <TextView
-                android:id="@+id/repoDescriptionText"
+                android:id="@+id/textDialogue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/repoDescriptionLabelText"
+                app:layout_constraintTop_toBottomOf="@id/textLabelDialogue"
                 android:layout_marginTop="5dp"
                 android:layout_marginHorizontal="20dp"
-                android:textSize="14sp"
+                android:textSize="13sp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-                tools:text="Uma descrição muito muito grande"/>
+                tools:text="Yes"/>
 
             <TextView
-                android:id="@+id/repoLanguageLabelText"
+                android:id="@+id/textLabelFavorites"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/repoDescriptionText"
+                app:layout_constraintTop_toBottomOf="@id/textDialogue"
                 android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="20dp"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                android:text="teste"/>
+                android:text="Favorites"/>
 
             <TextView
-                android:id="@+id/repoLanguageText"
+                android:id="@+id/textFavorites"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/repoLanguageLabelText"
+                app:layout_constraintTop_toBottomOf="@id/textLabelFavorites"
                 android:layout_marginTop="5dp"
                 android:layout_marginHorizontal="20dp"
-                android:textSize="14sp"
+                android:textSize="13sp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-                tools:text="Uma descrição muito muito grande"/>
+                tools:text="10"/>
 
             <TextView
-                android:id="@+id/repoWatchersLabelText"
+                android:id="@+id/textLabelUpvotes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/repoLanguageText"
+                app:layout_constraintTop_toBottomOf="@id/textFavorites"
                 android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="20dp"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                android:text="teste"/>
+                android:text="Upvotes"/>
 
             <TextView
-                android:id="@+id/repoWatchersText"
+                android:id="@+id/textUpvoted"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/repoWatchersLabelText"
+                app:layout_constraintTop_toBottomOf="@id/textLabelUpvotes"
                 android:layout_marginTop="5dp"
                 android:layout_marginHorizontal="20dp"
-                android:textSize="14sp"
+                android:textSize="13sp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-                tools:text="Uma descrição muito muito grande"/>
+                tools:text="12"/>
 
             <TextView
-                android:id="@+id/repoForksLabelText"
+                android:id="@+id/textLabelDownvotes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/repoWatchersText"
+                app:layout_constraintTop_toBottomOf="@id/textUpvoted"
                 android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="20dp"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                android:text="teste"/>
+                android:text="Downvotes"/>
 
             <TextView
-                android:id="@+id/repoForksText"
+                android:id="@+id/textDownvotes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/repoForksLabelText"
+                app:layout_constraintTop_toBottomOf="@id/textLabelDownvotes"
                 android:layout_marginTop="5dp"
                 android:layout_marginHorizontal="20dp"
-                android:textSize="14sp"
+                android:textSize="13sp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-                tools:text="Uma descrição muito muito grande"/>
+                tools:text="11"/>
 
             <TextView
-                android:id="@+id/repoLastUpdateLabelText"
+                android:id="@+id/textLabelCreatedBy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/repoForksText"
+                app:layout_constraintTop_toBottomOf="@id/textDownvotes"
                 android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="20dp"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                android:text="teste"/>
+                android:text="Created By"/>
 
             <TextView
-                android:id="@+id/repoLastUpdateText"
+                android:id="@+id/textCreatedBy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/repoLastUpdateLabelText"
+                app:layout_constraintTop_toBottomOf="@id/textLabelCreatedBy"
                 android:layout_marginTop="5dp"
                 android:layout_marginHorizontal="20dp"
-                android:textSize="14sp"
+                android:textSize="13sp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-                tools:text="2020-01-28T18:25:40Z"/>
+                tools:text="mike123"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

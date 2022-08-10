@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.brunoponte.favquotes.databinding.QuoteListItemBinding
 import com.brunoponte.favquotes.domainModels.Quote
+import com.brunoponte.favquotes.ui.TagListInteraction
 
 
 interface QuoteListInteraction {

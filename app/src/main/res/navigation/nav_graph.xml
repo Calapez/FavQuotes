@@ -24,6 +24,11 @@
         <action
             android:id="@+id/action_quotesFragment_to_quoteDetailsFragment"
             app:destination="@id/quoteDetailsFragment" />
+        <argument
+            android:name="selectedTag"
+            app:argType="string"
+            android:defaultValue="" />
+
     </fragment>
 
     <fragment

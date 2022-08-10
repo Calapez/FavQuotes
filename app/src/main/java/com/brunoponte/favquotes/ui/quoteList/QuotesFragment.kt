@@ -5,19 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.brunoponte.favquotes.R
 import com.brunoponte.favquotes.databinding.QuotesFragmentBinding
 import com.brunoponte.favquotes.domainModels.Quote
+import com.brunoponte.favquotes.ui.TagListInteraction
+import com.brunoponte.favquotes.ui.quoteDetails.QuoteDetailsFragmentArgs
 import com.brunoponte.favquotes.ui.quoteList.listAdapter.QuoteListAdapter
 import com.brunoponte.favquotes.ui.quoteList.listAdapter.QuoteListInteraction
-import com.brunoponte.favquotes.ui.quoteList.listAdapter.TagListInteraction
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,6 +26,7 @@ class QuotesFragment : Fragment(), QuoteListInteraction, TagListInteraction {
 
     private lateinit var binding: QuotesFragmentBinding
     private val viewModel: QuotesViewModel by viewModels()
+    private val args: QuotesFragmentArgs by navArgs()
 
     private val listAdapter = QuoteListAdapter(this, this).apply {
         stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy
@@ -49,6 +51,11 @@ class QuotesFragment : Fragment(), QuoteListInteraction, TagListInteraction {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val selectedTag = args.selectedTag
+        if (selectedTag.isNotEmpty()) {
+            onClick(-1, selectedTag)
+        }
+
         binding.recyclerView.let { recyclerView ->
             recyclerView.layoutManager = LinearLayoutManager(context).also {
                 it.orientation = LinearLayoutManager.VERTICAL
@@ -64,15 +71,15 @@ class QuotesFragment : Fragment(), QuoteListInteraction, TagListInteraction {
         }
 
         binding.cardContent.setOnClickListener {
-            viewModel.onContentClicked()
+            viewModel.onContentFilterClicked()
         }
 
         binding.cardTag.setOnClickListener {
-            viewModel.onTagClicked()
+            viewModel.onTagFilterClicked()
         }
 
         binding.cardAuthor.setOnClickListener {
-            viewModel.onAuthorClicked()
+            viewModel.onAuthorFilterClicked()
         }
     }
 
@@ -87,6 +94,16 @@ class QuotesFragment : Fragment(), QuoteListInteraction, TagListInteraction {
         viewModel.onChangeQuoteScrollPosition(index)
     }
 
+    override fun onClick(position: Int, tag: String?) {
+        if (tag == null) {
+            return
+        }
+
+        viewModel.onTagClicked(tag)
+        binding.searchView.setText(tag)
+        binding.searchView.setSelection(tag.length)
+    }
+
     private fun setupViewModelObservers() {
         viewModel.quotes.observe(viewLifecycleOwner) { quotes ->
             listAdapter.submitList(quotes.map { it.copy() })
@@ -96,30 +113,26 @@ class QuotesFragment : Fragment(), QuoteListInteraction, TagListInteraction {
             binding.progressIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
 
-        viewModel.isContentSelected.observe(viewLifecycleOwner) { isContentSelected ->
+        viewModel.isContentFilterSelected.observe(viewLifecycleOwner) { isContentFilterSelected ->
             binding.cardContent.setCardBackgroundColor(resources.getColor(
-                if (isContentSelected) R.color.selectedColor
+                if (isContentFilterSelected) R.color.selectedColor
                 else R.color.white
             ))
 
         }
 
-        viewModel.isTagSelected.observe(viewLifecycleOwner) { isTagSelected ->
+        viewModel.isTagFilterSelected.observe(viewLifecycleOwner) { isTagFilterSelected ->
             binding.cardTag.setCardBackgroundColor(resources.getColor(
-                if (isTagSelected) R.color.selectedColor
+                if (isTagFilterSelected) R.color.selectedColor
                 else R.color.white
             ))
         }
 
-        viewModel.isAuthorSelected.observe(viewLifecycleOwner) { isAuthorSelected ->
+        viewModel.isAuthorFilterSelected.observe(viewLifecycleOwner) { isAuthorFilterSelected ->
             binding.cardAuthor.setCardBackgroundColor(resources.getColor(
-                if (isAuthorSelected) R.color.selectedColor
+                if (isAuthorFilterSelected) R.color.selectedColor
                 else R.color.white
             ))
         }
-    }
-
-    override fun onClick(position: Int, tag: String?) {
-        Toast.makeText(requireContext(), "Clicked Tag!", Toast.LENGTH_SHORT).show()
     }
 }

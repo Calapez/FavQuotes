@@ -44,7 +44,7 @@
             android:textSize="13sp"
             android:gravity="end"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
-            tools:text="Descrição do repositório edijoddijeijewjio eiwejojwijiojdiojewoijweoidjdjdijdioj eiwweiojijodiojdoidijoweoijiojoijweiojdijweiodjewj weijewjijeweiojjioiowefj"/>
+            tools:text="Author"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tagsRecyclerView"

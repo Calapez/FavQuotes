@@ -52,7 +52,7 @@
                         android:ellipsize="end"
                         android:textSize="13sp"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-                        android:text="Content"/>
+                        android:text="Quote"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
