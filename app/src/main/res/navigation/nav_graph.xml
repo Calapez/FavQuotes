@@ -13,7 +13,11 @@
         tools:layout="@layout/dashboard_fragment">
         <action
             android:id="@+id/action_dashboardFragment_to_quotesFragment"
-            app:destination="@id/quotesFragment" />
+            app:destination="@id/quotesFragment"
+            app:enterAnim="@anim/fragment_fade_in"
+            app:exitAnim="@anim/fragment_fade_out"
+            app:popEnterAnim="@anim/fragment_fade_in"
+            app:popExitAnim="@anim/fragment_fade_out" />
     </fragment>
 
     <fragment
@@ -23,7 +27,11 @@
         tools:layout="@layout/quotes_fragment">
         <action
             android:id="@+id/action_quotesFragment_to_quoteDetailsFragment"
-            app:destination="@id/quoteDetailsFragment" />
+            app:destination="@id/quoteDetailsFragment"
+            app:enterAnim="@anim/fragment_fade_in"
+            app:exitAnim="@anim/fragment_fade_out"
+            app:popEnterAnim="@anim/fragment_fade_in"
+            app:popExitAnim="@anim/fragment_fade_out" />
         <argument
             android:name="selectedTag"
             app:argType="string"

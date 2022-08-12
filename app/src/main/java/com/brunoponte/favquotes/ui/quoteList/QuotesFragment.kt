@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.brunoponte.favquotes.R
 import com.brunoponte.favquotes.databinding.QuotesFragmentBinding
 import com.brunoponte.favquotes.domainModels.Quote
+import com.brunoponte.favquotes.enums.FilterType
 import com.brunoponte.favquotes.ui.TagListInteraction
-import com.brunoponte.favquotes.ui.quoteDetails.QuoteDetailsFragmentArgs
 import com.brunoponte.favquotes.ui.quoteList.listAdapter.QuoteListAdapter
 import com.brunoponte.favquotes.ui.quoteList.listAdapter.QuoteListInteraction
 import dagger.hilt.android.AndroidEntryPoint
@@ -70,8 +70,8 @@ class QuotesFragment : Fragment(), QuoteListInteraction, TagListInteraction {
             viewModel.searchQuotes(text.toString())
         }
 
-        binding.cardContent.setOnClickListener {
-            viewModel.onContentFilterClicked()
+        binding.cardQuote.setOnClickListener {
+            viewModel.onQuoteFilterClicked()
         }
 
         binding.cardTag.setOnClickListener {
@@ -113,24 +113,19 @@ class QuotesFragment : Fragment(), QuoteListInteraction, TagListInteraction {
             binding.progressIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
 
-        viewModel.isContentFilterSelected.observe(viewLifecycleOwner) { isContentFilterSelected ->
-            binding.cardContent.setCardBackgroundColor(resources.getColor(
-                if (isContentFilterSelected) R.color.selectedColor
+        viewModel.selectedFilter.observe(viewLifecycleOwner) { selectedFilter ->
+            binding.cardQuote.setCardBackgroundColor(resources.getColor(
+                if (selectedFilter == FilterType.Quote) R.color.selectedColor
                 else R.color.white
             ))
 
-        }
-
-        viewModel.isTagFilterSelected.observe(viewLifecycleOwner) { isTagFilterSelected ->
             binding.cardTag.setCardBackgroundColor(resources.getColor(
-                if (isTagFilterSelected) R.color.selectedColor
+                if (selectedFilter == FilterType.Tag) R.color.selectedColor
                 else R.color.white
             ))
-        }
 
-        viewModel.isAuthorFilterSelected.observe(viewLifecycleOwner) { isAuthorFilterSelected ->
             binding.cardAuthor.setCardBackgroundColor(resources.getColor(
-                if (isAuthorFilterSelected) R.color.selectedColor
+                if (selectedFilter == FilterType.Author) R.color.selectedColor
                 else R.color.white
             ))
         }

@@ -3,6 +3,7 @@ package com.brunoponte.favquotes.ui.quoteList
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.brunoponte.favquotes.domainModels.Quote
+import com.brunoponte.favquotes.enums.FilterType
 import com.brunoponte.favquotes.repository.IQuotesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -23,9 +24,7 @@ constructor(
 
     val isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     val quotes: MutableLiveData<List<Quote>> = MutableLiveData(listOf())
-    val isContentFilterSelected: MutableLiveData<Boolean> = MutableLiveData(true)
-    val isTagFilterSelected: MutableLiveData<Boolean> = MutableLiveData(false)
-    val isAuthorFilterSelected: MutableLiveData<Boolean> = MutableLiveData(false)
+    val selectedFilter: MutableLiveData<FilterType?> = MutableLiveData(null)
 
     fun getFirstQuotes() {
         // Fetches the first page of the repos
@@ -54,46 +53,35 @@ constructor(
         }
     }
 
-    fun onContentFilterClicked() {
-        if (isContentFilterSelected.value == true) {
+    fun onQuoteFilterClicked() {
+        if (selectedFilter.value == FilterType.Quote) {
             return
         }
 
-        isContentFilterSelected.value = true
-        isTagFilterSelected.value = false
-        isAuthorFilterSelected.value = false
-
+        selectedFilter.value = FilterType.Quote
         searchQuotes(query)
     }
 
     fun onTagFilterClicked() {
-        if (isTagFilterSelected.value == true) {
+        if (selectedFilter.value == FilterType.Tag) {
             return
         }
 
-        isContentFilterSelected.value = false
-        isTagFilterSelected.value = true
-        isAuthorFilterSelected.value = false
-
+        selectedFilter.value = FilterType.Tag
         searchQuotes(query)
     }
 
     fun onAuthorFilterClicked() {
-        if (isAuthorFilterSelected.value == true) {
+        if (selectedFilter.value == FilterType.Author) {
             return
         }
 
-        isContentFilterSelected.value = false
-        isTagFilterSelected.value = false
-        isAuthorFilterSelected.value = true
-
+        selectedFilter.value = FilterType.Author
         searchQuotes(query)
     }
 
     fun onTagClicked(tag: String) {
-        isContentFilterSelected.value = false
-        isTagFilterSelected.value = true
-        isAuthorFilterSelected.value = false
+        selectedFilter.value = FilterType.Tag
     }
 
     private fun getNextPage() {
@@ -132,9 +120,11 @@ constructor(
     }
 
     private val filterType
-        get() = if (isTagFilterSelected.value == true) { "tag" }
-                else if (isAuthorFilterSelected.value == true) { "author" }
-                else { null }
+        get() = when(selectedFilter.value) {
+            FilterType.Tag -> "tag"
+            FilterType.Author -> "author"
+            else -> null
+        }
 
     private fun reachedEndOfList() = scrollPosition >= quotes.value!!.size - 1
 
