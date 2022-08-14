@@ -33,11 +33,6 @@ class QuotesFragment : Fragment(), QuoteListInteraction, TagListInteraction {
             .PREVENT_WHEN_EMPTY
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.getFirstQuotes()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -89,9 +84,9 @@ class QuotesFragment : Fragment(), QuoteListInteraction, TagListInteraction {
         findNavController().navigate(action)
     }
 
-    override fun onIndexReached(index: Int) {
+    override fun onEndReached() {
         // Reached a new element in Recycler View, update scroll position in VM
-        viewModel.onChangeQuoteScrollPosition(index)
+        viewModel.onEndReached()
     }
 
     override fun onClick(position: Int, tag: String?) {
@@ -99,9 +94,9 @@ class QuotesFragment : Fragment(), QuoteListInteraction, TagListInteraction {
             return
         }
 
-        viewModel.onTagClicked(tag)
         binding.searchView.setText(tag)
         binding.searchView.setSelection(tag.length)
+        viewModel.onTagClicked(tag)
     }
 
     private fun setupViewModelObservers() {

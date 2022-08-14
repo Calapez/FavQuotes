@@ -19,12 +19,15 @@ constructor(
 ) : ViewModel() {
 
     private var query = ""
-    private var scrollPosition = 0
     private var page = 1
 
     val isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     val quotes: MutableLiveData<List<Quote>> = MutableLiveData(listOf())
-    val selectedFilter: MutableLiveData<FilterType?> = MutableLiveData(null)
+    val selectedFilter: MutableLiveData<FilterType> = MutableLiveData(FilterType.Quote)
+
+    init {
+        getFirstQuotes()
+    }
 
     fun getFirstQuotes() {
         // Fetches the first page of the repos
@@ -44,10 +47,8 @@ constructor(
         }
     }
 
-    fun onChangeQuoteScrollPosition(position: Int) {
-        scrollPosition = position
-
-        if (reachedEndOfList() && !isLoading.value!!) {
+    fun onEndReached() {
+        if (!isLoading.value!!) {
             // Reached end of current page and isn't loading quotes. Must load next page.
             getNextPage()
         }
@@ -59,7 +60,7 @@ constructor(
         }
 
         selectedFilter.value = FilterType.Quote
-        searchQuotes(query)
+        searchQuotes(query, forceSearch = true)
     }
 
     fun onTagFilterClicked() {
@@ -68,7 +69,7 @@ constructor(
         }
 
         selectedFilter.value = FilterType.Tag
-        searchQuotes(query)
+        searchQuotes(query, forceSearch = true)
     }
 
     fun onAuthorFilterClicked() {
@@ -77,35 +78,38 @@ constructor(
         }
 
         selectedFilter.value = FilterType.Author
-        searchQuotes(query)
+        searchQuotes(query, forceSearch = true)
     }
 
     fun onTagClicked(tag: String) {
         selectedFilter.value = FilterType.Tag
+        searchQuotes(tag, forceSearch = true)
     }
 
     private fun getNextPage() {
         CoroutineScope(Dispatchers.IO).launch {
-            if (reachedEndOfList()) {
-                isLoading.postValue(true)
+            isLoading.postValue(true)
 
-                // Prevents this to be called on first page load
-                if (page > 1) {
-                    val result = quotesRepo.getQuotes(PAGE_SIZE, page, query, filterType)
+            // Prevents this to be called on first page load
+            if (page > 1) {
+                val result = quotesRepo.getQuotes(PAGE_SIZE, page, query, filterType)
 
-                    // Append quotes
-                    val current = ArrayList(quotes.value)
-                    current.addAll(result)
-                    quotes.postValue(current)
+                // Append quotes
+                val current = ArrayList(quotes.value)
+                current.addAll(result)
+                quotes.postValue(current)
 
-                    page += 1
-                }
-                isLoading.postValue(false)
+                page += 1
             }
+            isLoading.postValue(false)
         }
     }
 
-    fun searchQuotes(newQuery: String?) {
+    fun searchQuotes(newQuery: String?, forceSearch: Boolean = false) {
+        if (query == newQuery && !forceSearch) {
+            return
+        }
+
         query = newQuery ?: ""
         page = 1
 
@@ -125,8 +129,6 @@ constructor(
             FilterType.Author -> "author"
             else -> null
         }
-
-    private fun reachedEndOfList() = scrollPosition >= quotes.value!!.size - 1
 
     companion object {
         const val PAGE_SIZE = 25

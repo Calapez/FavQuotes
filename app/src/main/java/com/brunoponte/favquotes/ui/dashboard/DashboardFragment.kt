@@ -41,14 +41,20 @@ class DashboardFragment : Fragment() {
     }
 
     private fun setupViewModelObservers() {
+        val notApplicableText = getString(R.string.not_applicable)
+
         viewModel.quote.observe(viewLifecycleOwner) { quote ->
             binding.textQuote.visibility = if (quote == null) View.INVISIBLE else View.VISIBLE
+            binding.textAuthor.visibility = if (quote == null) View.INVISIBLE else View.VISIBLE
             binding.textQuote.text =
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    Html.fromHtml(quote?.body ?: "", Html.FROM_HTML_MODE_COMPACT)
+                    Html.fromHtml(quote?.body ?: notApplicableText, Html.FROM_HTML_MODE_COMPACT)
                 } else {
-                    Html.fromHtml(quote?.body ?: "")
+                    Html.fromHtml(quote?.body ?: notApplicableText)
                 }
+            binding.textAuthor.text = quote?.author?.let {
+                "- ${quote.author}"
+            } ?: notApplicableText
         }
 
         viewModel.loading.observe(viewLifecycleOwner) { loading ->

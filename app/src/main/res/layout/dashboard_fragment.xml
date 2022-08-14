@@ -8,21 +8,35 @@
     <TextView
         android:id="@+id/textQuote"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:typeface="serif"
         android:textSize="15sp"
+        android:layout_marginTop="30dp"
         android:layout_marginHorizontal="30dp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Quote do Dia" />
+
+    <TextView
+        android:id="@+id/textAuthor"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/textQuote"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="30dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="13sp"
+        android:gravity="end"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
+        tools:text="Author"/>
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progressIndicator"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:indeterminate="true"
-        app:layout_constraintBottom_toBottomOf="@+id/textQuote"
         app:layout_constraintEnd_toEndOf="@+id/textQuote"
         app:layout_constraintStart_toStartOf="@+id/textQuote"
         app:layout_constraintTop_toTopOf="@+id/textQuote" />
@@ -31,7 +45,7 @@
         android:id="@+id/buttonQuotes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/textQuote"
+        app:layout_constraintTop_toBottomOf="@+id/textAuthor"
         android:layout_marginHorizontal="30dp"
         android:padding="13dp"
         android:text="Search Quotes"

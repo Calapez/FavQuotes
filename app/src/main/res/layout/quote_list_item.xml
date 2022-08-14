@@ -26,10 +26,11 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="20dp"
             android:layout_marginHorizontal="10dp"
+            android:typeface="serif"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
             android:maxLines="3"
             android:ellipsize="end"
-            android:textSize="16sp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+            android:textSize="15sp"
             tools:text="Repositório de Código Aberto"/>
 
         <TextView
