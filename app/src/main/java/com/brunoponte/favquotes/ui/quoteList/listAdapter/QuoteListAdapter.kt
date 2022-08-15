@@ -10,9 +10,9 @@ import com.brunoponte.favquotes.ui.TagListInteraction
 
 
 interface QuoteListInteraction {
-    fun onClick(position: Int, quote: Quote)
+    fun onQuoteClick(position: Int, quote: Quote)
 
-    fun onEndReached()
+    fun onQuoteListEndReached()
 }
 
 class QuoteListAdapter(
@@ -28,7 +28,7 @@ class QuoteListAdapter(
     override fun onBindViewHolder(holder: QuoteViewHolder, position: Int) {
         holder.bind(getItem(position), position)
         if (position >= itemCount - 1) {
-            quoteListInteraction.onEndReached()
+            quoteListInteraction.onQuoteListEndReached()
         }
     }
 

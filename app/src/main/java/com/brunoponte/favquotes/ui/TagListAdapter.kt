@@ -9,7 +9,7 @@ import com.brunoponte.favquotes.R
 import com.brunoponte.favquotes.databinding.TagListItemBinding
 
 interface TagListInteraction {
-    fun onClick(position: Int, tag: String?)
+    fun onTagClick(position: Int, tag: String?)
 }
 
 class TagListAdapter(
@@ -49,7 +49,7 @@ class TagViewHolder(
             textTag.text = tag ?: notApplicableText
 
             root.setOnClickListener {
-                interaction.onClick(position, tag)
+                interaction.onTagClick(position, tag)
             }
         }
     }

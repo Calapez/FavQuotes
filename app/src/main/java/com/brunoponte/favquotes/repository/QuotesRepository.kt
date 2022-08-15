@@ -11,13 +11,17 @@ class QuotesRepository(
     private val quoteDao: QuoteDao
 ) : IQuotesRepository {
 
-    val authToken = "Bearer f8d23d2189461c7684cb34f67f848153"
+    // TODO: Don't keep auth token in code
+    private val authToken = "Bearer f8d23d2189461c7684cb34f67f848153"
 
-    override suspend fun getQuoteOfDayDay(): Quote? {
-        return requestService.getQuoteOfTheDay().quote?.let {
-            QuoteDtoMapper.mapToDomainModel(it)
+    override suspend fun getQuoteOfDayDay() =
+        try {
+            requestService.getQuoteOfTheDay().quote?.let {
+                QuoteDtoMapper.mapToDomainModel(it)
+            }
+        } catch (e: Exception) {
+            null
         }
-    }
 
     override suspend fun getQuotes(pageSize: Int, page: Int, query: String, filterType: String?) : List<Quote> {
 
@@ -34,7 +38,7 @@ class QuotesRepository(
             e.printStackTrace()
         }
 
-        // Always returns the Repos stored in the cache
+        // Always returns the Quotes stored in the cache
         val cachedRepos = quoteDao.getQuotes(pageSize = pageSize, page = page)
 
         return QuoteEntityMapper.toDomainModelList(cachedRepos)
@@ -47,8 +51,7 @@ class QuotesRepository(
 
     private suspend fun getQuotesFromNetwork(page: Int, query: String, filterType: String?) =
         QuoteDtoMapper.toDomainModelList(
-            requestService.getQuotes(authToken, page, query.ifEmpty { null }, filterType).quotes?.filter {
-                true//it.id != 0L
-            } ?: listOf()
+            requestService.getQuotes(authToken, page, query.ifEmpty { null }, filterType).quotes
+                ?: listOf()
         )
 }

@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">FavQuotes</string>
     <string name="not_applicable">N/A</string>
+    <string name="search_quotes">Search Quotes</string>
+    <string name="label_dialogue">Dialogue</string>
+    <string name="label_favorites">Favorites</string>
+    <string name="label_upvotes">Upvotes</string>
+    <string name="label_downvotes">Downvotes</string>
+    <string name="label_created_by">Created by</string>
+    <string name="hint_search">Search…</string>
+    <string name="filter_quote">Quote</string>
+    <string name="filter_tag">Tag</string>
+    <string name="filter_author">Author</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

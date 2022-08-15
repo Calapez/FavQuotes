@@ -69,7 +69,7 @@
                 android:ellipsize="end"
                 android:textSize="14sp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                android:text="Dialogue"/>
+                android:text="@string/label_dialogue"/>
 
             <TextView
                 android:id="@+id/textDialogue"
@@ -91,7 +91,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:textSize="14sp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                android:text="Favorites"/>
+                android:text="@string/label_favorites"/>
 
             <TextView
                 android:id="@+id/textFavorites"
@@ -113,7 +113,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:textSize="14sp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                android:text="Upvotes"/>
+                android:text="@string/label_upvotes"/>
 
             <TextView
                 android:id="@+id/textUpvoted"
@@ -135,7 +135,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:textSize="14sp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                android:text="Downvotes"/>
+                android:text="@string/label_downvotes"/>
 
             <TextView
                 android:id="@+id/textDownvotes"
@@ -157,7 +157,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:textSize="14sp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                android:text="Created By"/>
+                android:text="@string/label_created_by"/>
 
             <TextView
                 android:id="@+id/textCreatedBy"

@@ -6,7 +6,6 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,7 +19,6 @@ import com.brunoponte.favquotes.domainModels.Quote
 import com.brunoponte.favquotes.ui.TagListAdapter
 import com.brunoponte.favquotes.ui.TagListInteraction
 import com.brunoponte.favquotes.ui.dashboard.DashboardFragmentDirections
-import com.brunoponte.favquotes.ui.quoteList.QuotesFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,7 +29,7 @@ class QuoteDetailsFragment : Fragment(), TagListInteraction {
     private val viewModel: QuoteDetailsViewModel by viewModels()
     private val args: QuoteDetailsFragmentArgs by navArgs()
 
-    val listAdapter = TagListAdapter(this).apply {
+    private val listAdapter = TagListAdapter(this).apply {
         stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy
             .PREVENT_WHEN_EMPTY
     }
@@ -63,7 +61,7 @@ class QuoteDetailsFragment : Fragment(), TagListInteraction {
         setupViewModelObservers()
     }
 
-    override fun onClick(position: Int, tag: String?) {
+    override fun onTagClick(position: Int, tag: String?) {
         if (tag == null) {
             return
         }
@@ -98,7 +96,9 @@ class QuoteDetailsFragment : Fragment(), TagListInteraction {
                 listAdapter.submitList(it)
             }
 
-            binding.textDialogue.text = if (quote.isDialogue == true) "Yes" else "No"
+            binding.textDialogue.text = getString(
+                if (quote.isDialogue == true) R.string.yes
+                else R.string.yes)
 
             binding.textFavorites.text = quote.favorites?.toString() ?: notApplicableText
 

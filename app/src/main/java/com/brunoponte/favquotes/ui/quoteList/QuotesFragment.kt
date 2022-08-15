@@ -48,7 +48,7 @@ class QuotesFragment : Fragment(), QuoteListInteraction, TagListInteraction {
 
         val selectedTag = args.selectedTag
         if (selectedTag.isNotEmpty()) {
-            onClick(-1, selectedTag)
+            onTagClick(-1, selectedTag)
         }
 
         binding.recyclerView.let { recyclerView ->
@@ -78,18 +78,18 @@ class QuotesFragment : Fragment(), QuoteListInteraction, TagListInteraction {
         }
     }
 
-    override fun onClick(position: Int, quote: Quote) {
+    override fun onQuoteClick(position: Int, quote: Quote) {
         // Navigate to Details Fragment
         val action = QuotesFragmentDirections.actionQuotesFragmentToQuoteDetailsFragment(quote.id)
         findNavController().navigate(action)
     }
 
-    override fun onEndReached() {
+    override fun onQuoteListEndReached() {
         // Reached a new element in Recycler View, update scroll position in VM
         viewModel.onEndReached()
     }
 
-    override fun onClick(position: Int, tag: String?) {
+    override fun onTagClick(position: Int, tag: String?) {
         if (tag == null) {
             return
         }

@@ -21,7 +21,7 @@ class QuoteEntityMapper {
         )
 
         fun mapToEntity(model: Quote) = QuoteEntity (
-            id = model.id ?: -1,
+            id = model.id,
             isDialogue = model.isDialogue,
             isPrivate = model.isPrivate,
             tags = model.tags,

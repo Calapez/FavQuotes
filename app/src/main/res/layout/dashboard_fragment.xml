@@ -16,7 +16,7 @@
         android:layout_marginHorizontal="30dp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Quote do Dia" />
+        tools:text="Quote of the Day" />
 
     <TextView
         android:id="@+id/textAuthor"
@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textAuthor"
         android:layout_marginHorizontal="30dp"
         android:padding="13dp"
-        android:text="Search Quotes"
+        android:text="@string/search_quotes"
         android:layout_marginTop="30dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

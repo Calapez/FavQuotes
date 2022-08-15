@@ -29,11 +29,11 @@ constructor(
         getFirstQuotes()
     }
 
-    fun getFirstQuotes() {
-        // Fetches the first page of the repos
+    private fun getFirstQuotes() {
+        // Fetches the first page of the quotes
 
         if (quotes.value?.isNotEmpty() == true) {
-            // Already got repos
+            // Already got Quotes
             return
         }
 

@@ -31,7 +31,7 @@
             android:maxLines="3"
             android:ellipsize="end"
             android:textSize="15sp"
-            tools:text="Repositório de Código Aberto"/>
+            tools:text="Open Source Repository"/>
 
         <TextView
             android:id="@+id/textAuthor"

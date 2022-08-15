@@ -44,7 +44,7 @@ class QuoteViewHolder(
             }
 
             root.setOnClickListener {
-                quoteListInteraction.onClick(position, quote)
+                quoteListInteraction.onQuoteClick(position, quote)
             }
         }
 
